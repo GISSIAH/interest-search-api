@@ -13,7 +13,7 @@ import { UserService } from './user.service';
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
-
+  //learn to use specific route for filter on all parent route
   @Get('specific/:id')
   public getUser(@Param('id', ParseIntPipe) id: number): Promise<User> {
     return this.userService.getUser(id);
