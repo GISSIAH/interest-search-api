@@ -6,7 +6,7 @@ export class CreateUserDto {
   public username: string;
 
   @IsNotEmpty()
-  public interests: string;
+  public interests: string[];
 
   @IsNotEmpty()
   public lat: string;

@@ -13,8 +13,8 @@ export class User {
   @Column({ type: 'varchar', length: 30 })
   public username: string;
 
-  @Column({ array: true })
-  public interests: string;
+  @Column('text', { array: true })
+  public interests: string[];
 
   @Column({ type: 'real' })
   public lat: string;

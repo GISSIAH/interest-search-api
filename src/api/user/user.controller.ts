@@ -4,6 +4,7 @@ import {
   Param,
   ParseIntPipe,
   Post,
+  Query,
   Req,
 } from '@nestjs/common';
 import { Request } from 'express';
@@ -27,5 +28,19 @@ export class UserController {
   @Get('all')
   public getAll(): Promise<User[]> {
     return this.userService.getAll();
+  }
+
+  @Get('match')
+  public async matchUser(
+    @Query() q,
+  ): Promise<{ name: string; count: number }[]> {
+    const user = await this.getUser(q.id);
+
+    const nearbyUsers = await this.userService.getNearbyUsers(
+      Number(user.lat),
+      Number(user.lon),
+      500,
+    );
+    return this.userService.matchInterests(user.interests, nearbyUsers);
   }
 }
